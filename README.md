@@ -28,6 +28,8 @@ export GITEA_OWNER="example-user"
 export GITEA_TOKEN="example-token"
 ```
 
+If any required variables are missing and the script is run in a terminal, it will prompt for them and explain where to get the values. In non-interactive shells, it will fail fast.
+
 Optional environment variables (defaults shown):
 
 ```bash
@@ -36,6 +38,8 @@ export GITEA_SSH_HOST="gitea.example.com"
 export GITEA_SSH_PORT="222"
 export GITEA_OWNER_TYPE="org"
 ```
+
+If optional variables are not set, the script will prompt for them and you can press Enter to accept the defaults.
 
 Defaults if not set:
 
@@ -84,4 +88,3 @@ This script only migrates Git data. It does not migrate:
 - Pull requests
 - Wikis
 - Permissions
-

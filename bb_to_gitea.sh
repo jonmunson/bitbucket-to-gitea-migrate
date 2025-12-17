@@ -2,22 +2,6 @@
 set -e
 
 ########################################
-# REQUIRED ENV VARS
-########################################
-BB_WORKSPACE="${BB_WORKSPACE:?Set BB_WORKSPACE}"
-GITEA_OWNER="${GITEA_OWNER:?Set GITEA_OWNER}"
-GITEA_TOKEN="${GITEA_TOKEN:?Set GITEA_TOKEN}"
-
-########################################
-# OPTIONAL ENV VARS (safe defaults)
-########################################
-GITEA_URL="${GITEA_URL:-http://localhost:3000}"
-GITEA_SSH_HOST="${GITEA_SSH_HOST:-localhost}"
-GITEA_SSH_PORT="${GITEA_SSH_PORT:-22}"
-GITEA_OWNER_TYPE="${GITEA_OWNER_TYPE:-user}"   # allowed: user|org
-GITEA_URL="${GITEA_URL%/}"
-
-########################################
 # PATHS (script-local, safe)
 ########################################
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -34,6 +18,102 @@ touch "$DONE_FILE" "$FAIL_FILE"
 ########################################
 ts() { date +"%Y-%m-%d %H:%M:%S"; }
 now() { date +%s; }
+
+prompt_var() {
+  var_name="$1"
+  prompt="$2"
+  default_val="$3"
+  required="$4"
+  help="$5"
+
+  if [ -n "$help" ]; then
+    printf "%s\n" "$help"
+  fi
+
+  while :; do
+    if [ -n "$default_val" ]; then
+      printf "%s [%s]: " "$prompt" "$default_val"
+    else
+      printf "%s: " "$prompt"
+    fi
+    if ! IFS= read -r input; then
+      echo
+      echo "ERROR: input required for $var_name"
+      exit 1
+    fi
+    if [ -z "$input" ]; then
+      input="$default_val"
+    fi
+    if [ -n "$input" ]; then
+      eval "$var_name=\$input"
+      export "$var_name"
+      return
+    fi
+    if [ "$required" != "required" ]; then
+      eval "$var_name="
+      export "$var_name"
+      return
+    fi
+    echo "ERROR: $var_name is required"
+  done
+}
+
+require_var() {
+  var_name="$1"
+  prompt="$2"
+  help="$3"
+
+  eval "current=\${$var_name}"
+  if [ -n "$current" ]; then
+    return
+  fi
+  if [ ! -t 0 ]; then
+    echo "ERROR: $var_name is required (set it as an environment variable)"
+    exit 1
+  fi
+  prompt_var "$var_name" "$prompt" "" "required" "$help"
+}
+
+set_optional_var() {
+  var_name="$1"
+  prompt="$2"
+  default_val="$3"
+  help="$4"
+
+  eval "current=\${$var_name}"
+  if [ -n "$current" ]; then
+    return
+  fi
+  if [ ! -t 0 ]; then
+    eval "$var_name=\$default_val"
+    export "$var_name"
+    return
+  fi
+  prompt_var "$var_name" "$prompt" "$default_val" "optional" "$help"
+}
+
+########################################
+# REQUIRED ENV VARS (prompt if missing)
+########################################
+require_var "BB_WORKSPACE" "Bitbucket workspace ID" \
+  "Find this in Bitbucket Cloud under Workspace settings (URL slug)."
+require_var "GITEA_OWNER" "Gitea owner (user or org name)" \
+  "Use your Gitea username or the organization name that will own the repos."
+require_var "GITEA_TOKEN" "Gitea access token" \
+  "Generate in Gitea under Settings -> Applications -> Generate New Token."
+
+########################################
+# OPTIONAL ENV VARS (safe defaults)
+########################################
+set_optional_var "GITEA_URL" "Gitea base URL" "http://localhost:3000" \
+  "The base HTTP URL for the Gitea instance (no trailing slash)."
+set_optional_var "GITEA_SSH_HOST" "Gitea SSH host" "localhost" \
+  "The SSH host for Git operations (e.g. gitea.example.com)."
+set_optional_var "GITEA_SSH_PORT" "Gitea SSH port" "22" \
+  "The SSH port for Git operations."
+set_optional_var "GITEA_OWNER_TYPE" "Gitea owner type (user or org)" "user" \
+  "Use 'user' for a personal account or 'org' for a Gitea organization."
+GITEA_URL="${GITEA_URL%/}"
 
 already_done() {
   grep -qx "$1" "$DONE_FILE" 2>/dev/null
@@ -145,4 +225,3 @@ echo
 echo "[$(ts)] COMPLETE in ${TOTAL_TIME}s"
 echo "Successful: $DONE_FILE"
 echo "Failed:     $FAIL_FILE"
-
