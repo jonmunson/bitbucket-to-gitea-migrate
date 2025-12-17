@@ -95,6 +95,7 @@ This script exists to handle real-world Bitbucket restrictions where API access 
 
 ## Author
 
-- [web] Jon Munson - https://www.jonmunson.co.uk
-- [x] @jonmunson - https://x.com/jonmunson
-- [in] https://www.linkedin.com/in/jonmunson/
+- ![web](https://cdn.simpleicons.org/googlechrome/000000) Jon Munson - https://www.jonmunson.co.uk
+- ![x](https://cdn.simpleicons.org/x/000000) @jonmunson - https://x.com/jonmunson
+- ![in](https://cdn.simpleicons.org/linkedin/0A66C2) https://www.linkedin.com/in/jonmunson/
+- ![bmc](https://cdn.simpleicons.org/buymeacoffee/FFDD00) https://buymeacoffee.com/jonmunson
