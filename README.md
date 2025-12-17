@@ -88,3 +88,13 @@ This script only migrates Git data. It does not migrate:
 - Pull requests
 - Wikis
 - Permissions
+
+## Author Notes
+
+This script exists to handle real-world Bitbucket restrictions where API access is unavailable. It favors reliability, portability, and auditability over complexity.
+
+## Author
+
+- [web] Jon Munson - https://www.jonmunson.co.uk
+- [x] @jonmunson - https://x.com/jonmunson
+- [in] https://www.linkedin.com/in/jonmunson/

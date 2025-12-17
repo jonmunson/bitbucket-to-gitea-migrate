@@ -19,6 +19,14 @@ touch "$DONE_FILE" "$FAIL_FILE"
 ts() { date +"%Y-%m-%d %H:%M:%S"; }
 now() { date +%s; }
 
+show_banner() {
+  cat <<'EOF'
+========================================
+  Bitbucket -> Gitea Git Migration (SSH)
+========================================
+EOF
+}
+
 prompt_var() {
   var_name="$1"
   prompt="$2"
@@ -95,6 +103,10 @@ set_optional_var() {
 ########################################
 # REQUIRED ENV VARS (prompt if missing)
 ########################################
+if [ -t 0 ]; then
+  show_banner
+fi
+
 require_var "BB_WORKSPACE" "Bitbucket workspace ID" \
   "Find this in Bitbucket Cloud under Workspace settings (URL slug)."
 require_var "GITEA_OWNER" "Gitea owner (user or org name)" \
