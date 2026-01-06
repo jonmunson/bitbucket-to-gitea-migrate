@@ -1,5 +1,12 @@
 # Bitbucket Cloud to Gitea Git Migration (SSH)
 
+[![Website](https://img.shields.io/badge/Website-jonmunson.co.uk-111111?)](https://www.jonmunson.co.uk)
+[![X](https://img.shields.io/badge/@jonmunson-111111?logo=x&logoColor=white)](https://x.com/jonmunson)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Jon%20Munson-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jonmunson/)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-Support-FFDD00?logo=buymeacoffee&logoColor=000000)](https://buymeacoffee.com/jonmunson)
+
+---
+
 This script migrates Git repositories from Bitbucket Cloud to Gitea using Git over SSH only. It clones each repo with `git clone --mirror` and pushes to Gitea with `git push --mirror`. The process is resumable and will auto-create missing repositories in Gitea.
 
 ## What it does
@@ -93,9 +100,23 @@ This script only migrates Git data. It does not migrate:
 
 This script exists to handle real-world Bitbucket restrictions where API access is unavailable. It favors reliability, portability, and auditability over complexity.
 
-## Author
+---
 
-- <img src="https://cdn.simpleicons.org/googlechrome/000000" alt="web" width="16" height="16"> Jon Munson - https://www.jonmunson.co.uk
-- <img src="https://s.magecdn.com/social/tc-x.svg" alt="x" width="16" height="16"> @jonmunson - https://x.com/jonmunson
-- <img src="https://s.magecdn.com/social/tc-linkedin.svg" alt="linkedin" width="16" height="16"> https://www.linkedin.com/in/jonmunson/
-- <img src="https://cdn.simpleicons.org/buymeacoffee/FFDD00" alt="buy me a coffee" width="16" height="16"> https://buymeacoffee.com/jonmunson
+### Who made this?
+
+I’m **Jon Munson** - I like building simple things that solve real problems.
+
+**Your support helps me keep shipping:** maintaining repos, fixing bugs, and adding features.  
+<a href="https://buymeacoffee.com/jonmunson">
+  <img src="https://cdn.simpleicons.org/buymeacoffee/FFDD00" alt="buy me a coffee" width="16" height="16">
+  <b>&nbsp;Buy me a coffee</b>
+</a>
+
+More about me:
+&nbsp;<a href="https://www.jonmunson.co.uk"><img src="https://cdn.simpleicons.org/googlechrome/ffffff" width="16" height="16"><b>&nbsp;Website</b></a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="https://x.com/jonmunson"><img src="https://s.magecdn.com/social/tc-x.svg" width="16" height="16"><b>&nbsp;@jonmunson</b></a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="https://www.linkedin.com/in/jonmunson/"><img src="https://s.magecdn.com/social/tc-linkedin.svg" width="16" height="16"><b>&nbsp;LinkedIn</b></a>
+
+---
