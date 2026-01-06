@@ -96,6 +96,6 @@ This script exists to handle real-world Bitbucket restrictions where API access 
 ## Author
 
 - <img src="https://cdn.simpleicons.org/googlechrome/000000" alt="web" width="16" height="16"> Jon Munson - https://www.jonmunson.co.uk
-- <img src="https://cdn.simpleicons.org/x/000000" alt="x" width="16" height="16"> @jonmunson - https://x.com/jonmunson
-- <img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="linkedin" width="16" height="16"> https://www.linkedin.com/in/jonmunson/
+- <img src="https://s.magecdn.com/social/tc-x.svg" alt="x" width="16" height="16"> @jonmunson - https://x.com/jonmunson
+- <img src="https://s.magecdn.com/social/tc-linkedin.svg" alt="linkedin" width="16" height="16"> https://www.linkedin.com/in/jonmunson/
 - <img src="https://cdn.simpleicons.org/buymeacoffee/FFDD00" alt="buy me a coffee" width="16" height="16"> https://buymeacoffee.com/jonmunson
